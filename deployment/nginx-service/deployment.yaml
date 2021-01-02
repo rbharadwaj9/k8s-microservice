@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-nginx-deploy
+  namespace: database-connectivity
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db_nginx
+      component: db
+      env: db_staging
+  template:
+    metadata:
+      labels:
+        app: db_nginx
+        component: db
+        env: db_staging
+    spec:
+      containers:
+        - name: nginx
+          image: rbharadwaj9/ms_nginx-service
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-nginx-service
+  namespace: database-connectivity
+spec:
+  selector:
+    app: db_nginx
+    component: db
+    env: db_staging
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer 
+
