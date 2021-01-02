@@ -5,6 +5,6 @@ metadata:
   namespace: database-connectivity
 subsets:
   - addresses:
-    - ip: 10.138.0.2 # 104.198.102.115 # 
+    - ip: 10.138.0.2 # VM Instance Internal IP
     ports:
       - port: 3000
