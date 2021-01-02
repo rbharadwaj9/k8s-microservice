@@ -1,0 +1,13 @@
+version: "3.4"
+services:
+  nginx-service:
+    build: server/
+    ports: 
+      - "80:80"
+    volumes:
+      - type: bind
+        source: ./server/conf.d/
+        target: /etc/nginx/conf.d/
+
+  test-service:
+    image: rbharadwaj9/helloworld_microservice
